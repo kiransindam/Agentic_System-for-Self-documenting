@@ -1,5 +1,5 @@
 # Coding Documentation
-
+<img width="1883" height="917" alt="Screenshot 2025-09-16 162225" src="https://github.com/user-attachments/assets/835486f2-3502-4010-b7f1-8dd9f0da488c" />
 `Coding Documentation` is an AI-powered developer tool built with Next.js and Genkit that helps you automatically generate, improve, and manage documentation for your code. Simply paste your code, and let the AI assist you in creating clear and comprehensive documentation.
 
 ## Features
@@ -78,6 +78,9 @@ Now you are ready to run the application locally.
 3.  **View the Application**:
     Open your web browser and navigate to the following address:
     [http://localhost:9002](http://localhost:9002)
+4 .  **PROJECT QR**
+    <img width="300" height="282" alt="Project QR -CODE" src="https://github.com/user-attachments/assets/52a4e5ed-70c1-4352-91da-53ca254da1ce" />
+
 
 You should now see the "Coding Documentation" application running on your local machine!
 
