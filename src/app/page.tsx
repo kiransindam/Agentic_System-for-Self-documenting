@@ -98,7 +98,7 @@ export default function Home() {
       <header className="flex items-center h-16 px-6 border-b border-border shrink-0">
         <div className="flex items-center gap-3">
           <Logo className="w-8 h-8 text-primary" />
-          <h1 className="text-2xl font-semibold font-headline">CodeMaestro</h1>
+          <h1 className="text-2xl font-semibold font-headline">Coding Documentation</h1>
         </div>
       </header>
 

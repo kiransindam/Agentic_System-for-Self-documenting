@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'CodeMaestro',
+  title: 'Coding Documentation',
   description: 'AI-powered developer tool for self-documenting code',
 };
 
