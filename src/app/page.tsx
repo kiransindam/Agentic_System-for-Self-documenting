@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useTransition, useRef, ChangeEvent, MouseEvent } from "react"
-import { Upload, Download, Sparkles, Wand } from "lucide-react"
+import { Upload, Download, Sparkles, Wand, Github, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -153,7 +153,7 @@ export default function Home() {
             </CardContent>
           </Card>
           <div className="grid grid-cols-2 gap-4 p-4 pt-0">
-             <Button onClick={handleGenerate} disabled={isPending || !code} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-sky-500/20 disabled:shadow-none disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed">
+             <Button onClick={handleGenerate} disabled={isPending || !code} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-purple-500/30 disabled:shadow-none disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed">
               {isPending ? <LoadingSpinner /> : <Sparkles />}
               Generate Docs
             </Button>
@@ -197,6 +197,19 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <footer className="py-8 px-4 text-center text-muted-foreground">
+        <p className="mb-4">Created by Kiransindam</p>
+        <div className="flex justify-center items-center gap-6">
+            <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Linkedin size={20} />
+                LinkedIn
+            </a>
+            <a href="https://github.com/your-github-profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Github size={20} />
+                GitHub
+            </a>
+        </div>
+      </footer>
     </div>
   )
 }
