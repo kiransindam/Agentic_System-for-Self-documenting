@@ -199,15 +199,15 @@ export default function Home() {
       </main>
       <footer className="py-8 px-4 text-center text-muted-foreground">
         <p className="mb-4">Created by Kiransindam</p>
-        <div className="flex justify-center items-center gap-6">
-            <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Linkedin size={20} />
-                LinkedIn
-            </a>
-            <a href="https://github.com/your-github-profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Github size={20} />
-                GitHub
-            </a>
+        <div className="flex justify-center items-center gap-6">  
+          <a href="https://www.linkedin.com/in/kiransindam" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+             <Linkedin size={20} />
+              LinkedIn
+             </a>
+          <a href="https://github.com/kiransindam" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Github size={20} />
+              GitHub
+              </a>
         </div>
       </footer>
     </div>
