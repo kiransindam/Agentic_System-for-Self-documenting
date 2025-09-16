@@ -72,8 +72,10 @@ Now you are ready to run the application locally.
     npm run dev
     ```
     This command runs the app in development mode with Turbopack for faster performance.
-
-2.  **View the Application**:
+2. **🔗 Live Demonstration**
+   link : https://9000-firebase-studio-1758006815631.cluster-va5f6x3wzzh4stde63ddr3qgge.cloudworkstations.dev/
+   
+3.  **View the Application**:
     Open your web browser and navigate to the following address:
     [http://localhost:9002](http://localhost:9002)
 
