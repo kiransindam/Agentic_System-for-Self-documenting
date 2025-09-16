@@ -78,9 +78,9 @@ Now you are ready to run the application locally.
 3.  **View the Application**:
     Open your web browser and navigate to the following address:
     [http://localhost:9002](http://localhost:9002)
-4 .  **PROJECT QR**
-    <img width="300" height="282" alt="Project QR -CODE" src="https://github.com/user-attachments/assets/52a4e5ed-70c1-4352-91da-53ca254da1ce" />
 
+    <img width="300" height="282" alt="Project QR -CODE" src="https://github.com/user-attachments/assets/52a4e5ed-70c1-4352-91da-53ca254da1ce" />
+4 .  **PROJECT QR**
 
 You should now see the "Coding Documentation" application running on your local machine!
 
