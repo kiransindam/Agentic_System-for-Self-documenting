@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useTransition, useRef, ChangeEvent } from "react"
+import { useState, useTransition, useRef, ChangeEvent, MouseEvent } from "react"
 import { Upload, Download, Sparkles, Wand } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,6 +16,25 @@ export default function Home() {
   const [isPending, startTransition] = useTransition()
   const { toast } = useToast()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null);
+  const docCardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>, ref: React.RefObject<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) / (width / 2);
+    const y = (e.clientY - top - height / 2) / (height / 2);
+    ref.current.style.setProperty('--rotate-y', `${x * 10}deg`);
+    ref.current.style.setProperty('--rotate-x', `${-y * 10}deg`);
+    ref.current.style.setProperty('--scale', '1.05');
+  };
+
+  const handleMouseLeave = (ref: React.RefObject<HTMLDivElement>) => {
+    if (!ref.current) return;
+    ref.current.style.setProperty('--rotate-y', '0');
+    ref.current.style.setProperty('--rotate-x', '0');
+    ref.current.style.setProperty('--scale', '1');
+  };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -94,8 +113,8 @@ export default function Home() {
   }
   
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="flex items-center h-16 px-6 border-b border-border shrink-0">
+    <div className="flex flex-col min-h-screen bg-grid-slate-900/[0.04] bg-slate-950 text-foreground">
+      <header className="flex items-center h-16 px-6 border-b border-white/10 shrink-0 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <Logo className="w-8 h-8 text-primary" />
           <h1 className="text-2xl font-semibold font-headline">Coding Documentation</h1>
@@ -103,11 +122,16 @@ export default function Home() {
       </header>
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 md:p-8">
-        <div className="flex flex-col gap-4">
-          <Card className="flex-1 flex flex-col min-h-[60vh]">
+        <div 
+            className="flex flex-col gap-4 card-3d"
+            ref={cardRef}
+            onMouseMove={(e) => handleMouseMove(e, cardRef)}
+            onMouseLeave={() => handleMouseLeave(cardRef)}
+        >
+          <Card className="flex-1 flex flex-col min-h-[60vh] bg-transparent border-none shadow-none">
             <CardHeader className="flex flex-row items-center justify-between p-4">
               <CardTitle className="text-xl">Your Code</CardTitle>
-              <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+              <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="bg-white/10 border-white/20 hover:bg-white/20">
                 <Upload className="mr-2" />
                 Upload File
               </Button>
@@ -124,30 +148,35 @@ export default function Home() {
                 placeholder="Paste your code here or upload a file..."
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="font-code text-sm flex-1 resize-none bg-muted/20 border-0 focus-visible:ring-1 focus-visible:ring-primary rounded-t-none"
+                className="font-code text-sm flex-1 resize-none bg-black/30 border-white/10 focus-visible:ring-1 focus-visible:ring-primary rounded-lg"
               />
             </CardContent>
           </Card>
-          <div className="grid grid-cols-2 gap-4">
-             <Button onClick={handleGenerate} disabled={isPending || !code} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+          <div className="grid grid-cols-2 gap-4 p-4 pt-0">
+             <Button onClick={handleGenerate} disabled={isPending || !code} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-sky-500/20 disabled:shadow-none disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed">
               {isPending ? <LoadingSpinner /> : <Sparkles />}
               Generate Docs
             </Button>
-             <Button onClick={handleImprove} disabled={isPending || !documentation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+             <Button onClick={handleImprove} disabled={isPending || !documentation} variant="secondary" className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 shadow-lg shadow-sky-500/10 disabled:shadow-none disabled:bg-gray-500/20 disabled:text-gray-400 disabled:border-gray-500/30 disabled:cursor-not-allowed">
               {isPending ? <LoadingSpinner /> : <Wand />}
               Improve
             </Button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <Card className="flex-1 flex flex-col min-h-[60vh]">
+        <div 
+            className="flex flex-col gap-4 card-3d"
+            ref={docCardRef}
+            onMouseMove={(e) => handleMouseMove(e, docCardRef)}
+            onMouseLeave={() => handleMouseLeave(docCardRef)}
+        >
+          <Card className="flex-1 flex flex-col min-h-[60vh] bg-transparent border-none shadow-none">
             <CardHeader className="flex flex-row items-center justify-between p-4">
               <div className="flex items-center gap-2">
                 <CardTitle className="text-xl">AI-Generated Documentation</CardTitle>
                 {isPending && <LoadingSpinner />}
               </div>
-              <Button variant="ghost" size="sm" onClick={() => handleExport("md")} disabled={isPending || !documentation}>
+              <Button variant="ghost" size="sm" onClick={() => handleExport("md")} disabled={isPending || !documentation} className="hover:bg-white/10 disabled:text-gray-500">
                 <Download className="mr-2" />
                 Export MD
               </Button>
@@ -157,11 +186,11 @@ export default function Home() {
                 placeholder="Your generated documentation will appear here..."
                 value={documentation}
                 onChange={(e) => setDocumentation(e.target.value)}
-                className="font-code text-sm flex-1 resize-none bg-muted/20 border-0 focus-visible:ring-1 focus-visible:ring-primary rounded-t-none"
+                className="font-code text-sm flex-1 resize-none bg-black/30 border-white/10 focus-visible:ring-1 focus-visible:ring-primary rounded-lg"
               />
             </CardContent>
           </Card>
-          <div className="flex items-center justify-center p-2 rounded-md bg-muted/30">
+          <div className="flex items-center justify-center p-2 rounded-md mx-4 mb-2 bg-black/20">
             <p className="text-xs text-muted-foreground">
               You can edit the documentation directly in this text area before exporting.
             </p>
